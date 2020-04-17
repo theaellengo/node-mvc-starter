@@ -32,8 +32,21 @@ exports.getAll = function(sort, next) {
 
 exports.create = function(obj, next) {
   const student = new studentModel(obj);
-
   student.save(function(err, student) {
     next(err, student);
   });
 };
+
+exports.search = function(regex, next){
+  studentModel.find(regex, function(err,result){
+    console.log(result);
+    next(err, result);
+  });
+}
+
+exports.updateId = function(query, update, state, next){
+  studentModel.findOneAndUpdate(query, update, state, function(err, result){
+    console.log(result);
+    next(err,result);
+  });
+}
